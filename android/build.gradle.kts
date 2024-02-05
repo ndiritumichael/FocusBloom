@@ -37,7 +37,13 @@ android {
             isDebuggable = true
         }
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
@@ -56,12 +62,12 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(projects.shared)
     implementation(libs.compose.activity)
     implementation(libs.koin.android)
     coreLibraryDesugaring(libs.core.library.desugaring)
